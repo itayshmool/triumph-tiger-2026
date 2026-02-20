@@ -3,8 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triumph Tiger Rally Pro 900 2026 - Specifications</title>
+    <title>Triumph Tiger Rally Pro 900 | 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --sand: #E6D5C3;
+            --rust: #D4622C;
+            --charcoal: #1A1A1A;
+            --dark-earth: #2C2416;
+            --safety-orange: #FF6B35;
+            --topo-green: #8B9D83;
+            --rally-yellow: #F4A259;
+            --grid-line: rgba(230, 213, 195, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,348 +26,908 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: var(--charcoal);
+            color: var(--sand);
+            overflow-x: hidden;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        /* Topographic background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 80px, var(--grid-line) 80px, var(--grid-line) 81px),
+                repeating-linear-gradient(90deg, transparent, transparent 80px, var(--grid-line) 80px, var(--grid-line) 81px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
         }
 
         .container {
-            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
 
+        /* Header - Rally Command Style */
         header {
-            text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
-            color: white;
-            border-radius: 20px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 40px rgba(211, 47, 47, 0.3);
+            position: relative;
+            padding: 40px 0 20px;
+            margin-bottom: 60px;
         }
 
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
+        .header-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 40px;
+            align-items: end;
+            border-bottom: 3px solid var(--safety-orange);
+            padding-bottom: 30px;
+            position: relative;
+        }
+
+        .header-grid::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 200px;
+            height: 3px;
+            background: var(--rally-yellow);
+            animation: scanline 3s ease-in-out infinite;
+        }
+
+        @keyframes scanline {
+            0%, 100% { transform: translateX(0); opacity: 1; }
+            50% { transform: translateX(600px); opacity: 0.3; }
+        }
+
+        .title-block h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            color: var(--sand);
             margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            animation: slideInLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            font-weight: 300;
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .hero-image {
-            width: 100%;
-            max-width: 900px;
-            margin: 40px auto;
-            border-radius: 15px;
+        .title-block .model-year {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--safety-orange);
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            animation: slideInLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s backwards;
+        }
+
+        .coordinates {
+            font-size: 0.85rem;
+            text-align: right;
+            line-height: 1.8;
+            opacity: 0.6;
+            animation: fadeIn 1s ease 0.5s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 0.6; }
+        }
+
+        .coordinates div {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Hero Image - Rally Shot */
+        .hero-section {
+            position: relative;
+            margin: 60px 0 80px;
+            animation: slideUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s backwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-image-wrapper {
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
+            box-shadow:
+                20px 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 0 0 1px rgba(230, 213, 195, 0.1);
         }
 
-        .hero-image img {
+        .hero-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--rust) 0%, transparent 50%, var(--safety-orange) 100%);
+            opacity: 0.15;
+            mix-blend-mode: multiply;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-image-wrapper img {
             width: 100%;
             height: auto;
             display: block;
+            filter: contrast(1.1) saturate(1.2);
+        }
+
+        /* Corner accent */
+        .hero-corner-accent {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: var(--safety-orange);
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            letter-spacing: 0.1em;
+        }
+
+        /* Stats overlay */
+        .hero-stats {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            border-left: 4px solid var(--safety-orange);
+            z-index: 3;
+            animation: fadeIn 1.2s ease 0.8s backwards;
+        }
+
+        .hero-stats .stat {
+            display: flex;
+            gap: 15px;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .hero-stats .stat:last-child {
+            margin-bottom: 0;
+        }
+
+        .hero-stats .stat-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--safety-orange);
+            line-height: 1;
+        }
+
+        .hero-stats .stat-label {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Specs Grid - Technical Layout */
+        .specs-section {
+            margin: 80px 0;
+        }
+
+        .section-header {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 40px;
+            position: relative;
+            padding-left: 20px;
+            animation: slideInLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 80%;
+            background: var(--safety-orange);
         }
 
         .specs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
         .spec-card {
-            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
-            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(44, 36, 22, 0.6), rgba(26, 26, 26, 0.8));
+            border: 1px solid rgba(230, 213, 195, 0.15);
             padding: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            border: 1px solid #333;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+            animation-delay: calc(var(--card-index) * 0.1s);
+            transition: all 0.3s ease;
+        }
+
+        .spec-card:nth-child(1) { --card-index: 0; }
+        .spec-card:nth-child(2) { --card-index: 1; }
+        .spec-card:nth-child(3) { --card-index: 2; }
+        .spec-card:nth-child(4) { --card-index: 3; }
+        .spec-card:nth-child(5) { --card-index: 4; }
+        .spec-card:nth-child(6) { --card-index: 5; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .spec-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--safety-orange), var(--rally-yellow));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .spec-card:hover::before {
+            transform: scaleX(1);
         }
 
         .spec-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(211, 47, 47, 0.3);
+            transform: translateX(10px);
+            border-color: rgba(255, 107, 53, 0.4);
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
         }
 
         .spec-card h2 {
-            color: #d32f2f;
-            font-size: 1.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--sand);
             margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #d32f2f;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .spec-item {
-            margin: 15px 0;
-            color: #e0e0e0;
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 15px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(230, 213, 195, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         .spec-label {
             font-weight: 600;
-            color: #fff;
-            display: inline-block;
-            min-width: 140px;
+            color: var(--rally-yellow);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
         }
 
         .spec-value {
-            color: #b0b0b0;
+            color: var(--sand);
+            font-weight: 400;
         }
 
-        .highlight {
-            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            margin: 40px 0;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(211, 47, 47, 0.3);
-        }
-
-        .highlight h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .features-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .features-list li {
-            padding: 10px 0;
-            padding-left: 30px;
+        /* Features - Diagonal Layout */
+        .features-section {
             position: relative;
-            color: #e0e0e0;
+            margin: 100px 0;
+            padding: 60px 0;
         }
 
-        .features-list li:before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: #d32f2f;
-            font-size: 1.5rem;
+        .features-diagonal {
+            position: relative;
+            background: linear-gradient(135deg, var(--dark-earth), var(--charcoal));
+            padding: 60px 40px;
+            clip-path: polygon(0 40px, 100% 0, 100% calc(100% - 40px), 0 100%);
+            border-left: 4px solid var(--safety-orange);
+            animation: slideInRight 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .price-section {
-            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            margin: 40px 0;
-            border: 2px solid #d32f2f;
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .price-section h2 {
-            color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .price {
+        .features-diagonal h2 {
+            font-family: 'Bebas Neue', sans-serif;
             font-size: 3rem;
-            color: #d32f2f;
-            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--safety-orange);
+            letter-spacing: 0.05em;
         }
 
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+            padding: 15px 0;
+            animation: fadeIn 0.5s ease backwards;
+            animation-delay: calc(var(--feature-index) * 0.05s);
+        }
+
+        .feature-item:nth-child(1) { --feature-index: 0; }
+        .feature-item:nth-child(2) { --feature-index: 1; }
+        .feature-item:nth-child(3) { --feature-index: 2; }
+        .feature-item:nth-child(4) { --feature-index: 3; }
+        .feature-item:nth-child(5) { --feature-index: 4; }
+        .feature-item:nth-child(6) { --feature-index: 5; }
+        .feature-item:nth-child(7) { --feature-index: 6; }
+        .feature-item:nth-child(8) { --feature-index: 7; }
+        .feature-item:nth-child(9) { --feature-index: 8; }
+        .feature-item:nth-child(10) { --feature-index: 9; }
+        .feature-item:nth-child(11) { --feature-index: 10; }
+        .feature-item:nth-child(12) { --feature-index: 11; }
+        .feature-item:nth-child(13) { --feature-index: 12; }
+
+        .feature-bullet {
+            min-width: 8px;
+            width: 8px;
+            height: 8px;
+            background: var(--safety-orange);
+            margin-top: 8px;
+            transform: rotate(45deg);
+        }
+
+        .feature-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--sand);
+        }
+
+        /* Price Section - Bold Callout */
+        .price-section {
+            margin: 80px 0;
+            position: relative;
+        }
+
+        .price-container {
+            background: var(--safety-orange);
+            color: var(--charcoal);
+            padding: 50px;
+            position: relative;
+            clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
+            animation: scaleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .price-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--rally-yellow);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .price-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+
+        .price-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            line-height: 1;
+            letter-spacing: 0.02em;
+        }
+
+        .price-note {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        .price-cta {
+            background: var(--charcoal);
+            color: var(--safety-orange);
+            border: none;
+            padding: 20px 40px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+        }
+
+        .price-cta:hover {
+            background: var(--dark-earth);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Highlights Section */
+        .highlights-section {
+            margin: 80px 0;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .highlight-card {
+            background: rgba(44, 36, 22, 0.4);
+            border: 1px solid rgba(230, 213, 195, 0.15);
+            padding: 25px;
+            position: relative;
+            animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+            animation-delay: calc(var(--highlight-index) * 0.08s);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:nth-child(1) { --highlight-index: 0; }
+        .highlight-card:nth-child(2) { --highlight-index: 1; }
+        .highlight-card:nth-child(3) { --highlight-index: 2; }
+        .highlight-card:nth-child(4) { --highlight-index: 3; }
+        .highlight-card:nth-child(5) { --highlight-index: 4; }
+        .highlight-card:nth-child(6) { --highlight-index: 5; }
+        .highlight-card:nth-child(7) { --highlight-index: 6; }
+        .highlight-card:nth-child(8) { --highlight-index: 7; }
+
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--safety-orange);
+            transition: height 0.4s ease;
+        }
+
+        .highlight-card:hover::before {
+            height: 100%;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 53, 0.3);
+        }
+
+        .highlight-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--rally-yellow);
+            margin-bottom: 10px;
+            opacity: 0.6;
+        }
+
+        .highlight-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--sand);
+        }
+
+        /* Footer */
         footer {
+            margin-top: 120px;
+            padding: 60px 0 40px;
+            border-top: 1px solid rgba(230, 213, 195, 0.2);
             text-align: center;
-            padding: 40px 20px;
-            color: #888;
-            margin-top: 60px;
+            opacity: 0.7;
+        }
+
+        footer p {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
         }
 
         footer a {
-            color: #d32f2f;
+            color: var(--safety-orange);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         footer a:hover {
-            text-decoration: underline;
+            color: var(--rally-yellow);
         }
 
+        .sources {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-            }
-
-            .specs-grid {
+            .header-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
 
-            .spec-label {
-                min-width: 120px;
+            .coordinates {
+                text-align: left;
             }
+
+            .hero-stats {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-top: 20px;
+            }
+
+            .price-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .price-cta {
+                width: 100%;
+            }
+
+            .spec-item {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .features-diagonal {
+                padding: 40px 20px;
+            }
+
+            .section-header {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Custom cursor effect */
+        body {
+            cursor: crosshair;
+        }
+
+        a, button {
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Triumph Tiger Rally Pro 900</h1>
-            <p class="subtitle">2026 Model Year - Ultimate Adventure Specification</p>
+            <div class="header-grid">
+                <div class="title-block">
+                    <h1>Tiger Rally Pro 900</h1>
+                    <div class="model-year">2026</div>
+                </div>
+                <div class="coordinates">
+                    <div>LAT: 52.4862° N</div>
+                    <div>LON: 1.8904° W</div>
+                    <div>HINCKLEY / UK</div>
+                </div>
+            </div>
         </header>
 
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1558980664-769d59546b3d?w=1200&h=600&fit=crop" alt="Triumph Tiger Rally Pro 900 2026">
-        </div>
+        <section class="hero-section">
+            <div class="hero-image-wrapper">
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-value">106.5</div>
+                        <div class="stat-label">HP</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">228</div>
+                        <div class="stat-label">KG</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">888</div>
+                        <div class="stat-label">CC</div>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&h=700&fit=crop&q=80" alt="Triumph Tiger Rally Pro 900 2026">
+                <div class="hero-corner-accent">900</div>
+            </div>
+        </section>
 
-        <div class="specs-grid">
-            <div class="spec-card">
-                <h2>Engine</h2>
-                <div class="spec-item">
-                    <span class="spec-label">Type:</span>
-                    <span class="spec-value">Liquid-cooled, DOHC, in-line 3-cylinder</span>
+        <section class="specs-section">
+            <h2 class="section-header">Technical Specifications</h2>
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <h2>Engine</h2>
+                    <div class="spec-item">
+                        <div class="spec-label">Type</div>
+                        <div class="spec-value">Liquid-cooled, DOHC, in-line 3-cylinder</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Displacement</div>
+                        <div class="spec-value">888cc</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Power</div>
+                        <div class="spec-value">106.5 hp @ 8,750 rpm</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Torque</div>
+                        <div class="spec-value">90 Nm @ 6,850 rpm</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Transmission</div>
+                        <div class="spec-value">6-speed / assist & slipper clutch</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Final Drive</div>
+                        <div class="spec-value">O-ring chain</div>
+                    </div>
                 </div>
-                <div class="spec-item">
-                    <span class="spec-label">Displacement:</span>
-                    <span class="spec-value">888cc</span>
+
+                <div class="spec-card">
+                    <h2>Performance</h2>
+                    <div class="spec-item">
+                        <div class="spec-label">Top Speed</div>
+                        <div class="spec-value">200+ km/h (124+ mph)</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Fuel Consumption</div>
+                        <div class="spec-value">4.70 l/100km (WMTC)</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Fuel Capacity</div>
+                        <div class="spec-value">20 liters (5.3 gallons)</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Riding Modes</div>
+                        <div class="spec-value">6 modes (Road, Sport, Rain, All-Terrain, Rider, Off-Road Pro)</div>
+                    </div>
                 </div>
-                <div class="spec-item">
-                    <span class="spec-label">Power:</span>
-                    <span class="spec-value">106.5 hp @ 8,750 rpm</span>
+
+                <div class="spec-card">
+                    <h2>Chassis</h2>
+                    <div class="spec-item">
+                        <div class="spec-label">Wet Weight</div>
+                        <div class="spec-value">228 kg (503 lb)</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Seat Height</div>
+                        <div class="spec-value">860 mm (adjustable)</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Rake / Trail</div>
+                        <div class="spec-value">24.4° / 116.6 mm</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Wheels</div>
+                        <div class="spec-value">21" front / 17" rear (spoked)</div>
+                    </div>
                 </div>
-                <div class="spec-item">
-                    <span class="spec-label">Torque:</span>
-                    <span class="spec-value">90 Nm (66.4 lb-ft) @ 6,850 rpm</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Transmission:</span>
-                    <span class="spec-value">6-speed with assist & slipper clutch</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Final Drive:</span>
-                    <span class="spec-value">O-ring chain</span>
+
+                <div class="spec-card">
+                    <h2>Suspension</h2>
+                    <div class="spec-item">
+                        <div class="spec-label">Front</div>
+                        <div class="spec-value">Showa 45mm USD forks, 240mm travel</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Rear</div>
+                        <div class="spec-value">Showa gas RSU, 230mm travel</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Front Brake</div>
+                        <div class="spec-value">Brembo Stylema dual discs</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Rear Brake</div>
+                        <div class="spec-value">Single disc with ABS</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">ABS</div>
+                        <div class="spec-value">Cornering ABS (switchable)</div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="spec-card">
-                <h2>Performance</h2>
-                <div class="spec-item">
-                    <span class="spec-label">Top Speed:</span>
-                    <span class="spec-value">200+ km/h (124+ mph)</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Fuel Consumption:</span>
-                    <span class="spec-value">4.70 l/100km (WMTC cycle)</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Fuel Capacity:</span>
-                    <span class="spec-value">20 liters (5.3 gallons)</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Riding Modes:</span>
-                    <span class="spec-value">6 modes (Road, Sport, Rain, All-Terrain, Rider, Off-Road Pro)</span>
+        <section class="features-section">
+            <div class="features-diagonal">
+                <h2>Technology & Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">7" Full-Color TFT Display with Turn-by-Turn Navigation</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">Full Bluetooth Connectivity (Calls, Music, GoPro Control)</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">"My Triumph" Connectivity Module (Standard)</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">USB-C Charging Port</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">Cornering ABS & Traction Control</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">Tire Pressure Monitoring System (TPMS)</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">Emergency Braking Warning System</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">High-Visibility Marker Lights</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">Quickshifter (Up & Down)</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">Heated Seats & Grips</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">LED Lighting (Full Suite)</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">Cruise Control</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-bullet"></div>
+                        <div class="feature-text">Off-Road Pro Mode (Rally Pro Exclusive)</div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="spec-card">
-                <h2>Chassis & Dimensions</h2>
-                <div class="spec-item">
-                    <span class="spec-label">Wet Weight:</span>
-                    <span class="spec-value">228 kg (503 lb)</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Seat Height:</span>
-                    <span class="spec-value">860 mm (33.9 in) - adjustable</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Rake / Trail:</span>
-                    <span class="spec-value">24.4° / 116.6 mm</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Wheels:</span>
-                    <span class="spec-value">21" front / 17" rear (spoked)</span>
+        <section class="price-section">
+            <div class="price-container">
+                <div class="price-grid">
+                    <div>
+                        <div class="price-label">Starting Price</div>
+                        <div class="price-value">€17,395</div>
+                        <div class="price-note">Price may vary by market and configuration</div>
+                    </div>
+                    <button class="price-cta" onclick="alert('Contact your local Triumph dealer for availability')">
+                        Find Dealer
+                    </button>
                 </div>
             </div>
+        </section>
 
-            <div class="spec-card">
-                <h2>Suspension & Brakes</h2>
-                <div class="spec-item">
-                    <span class="spec-label">Front Suspension:</span>
-                    <span class="spec-value">Showa 45mm USD forks, 240mm travel</span>
+        <section class="highlights-section">
+            <h2 class="section-header">Key Highlights</h2>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="highlight-number">01</div>
+                    <div class="highlight-text">13% more peak power compared to previous generation</div>
                 </div>
-                <div class="spec-item">
-                    <span class="spec-label">Rear Suspension:</span>
-                    <span class="spec-value">Showa gas RSU, 230mm travel</span>
+                <div class="highlight-card">
+                    <div class="highlight-number">02</div>
+                    <div class="highlight-text">T-plane crankshaft for distinctive triple-cylinder character</div>
                 </div>
-                <div class="spec-item">
-                    <span class="spec-label">Front Brake:</span>
-                    <span class="spec-value">Brembo Stylema dual discs</span>
+                <div class="highlight-card">
+                    <div class="highlight-number">03</div>
+                    <div class="highlight-text">Premium Showa suspension with extensive adjustment</div>
                 </div>
-                <div class="spec-item">
-                    <span class="spec-label">Rear Brake:</span>
-                    <span class="spec-value">Single disc with ABS</span>
+                <div class="highlight-card">
+                    <div class="highlight-number">04</div>
+                    <div class="highlight-text">Brembo Stylema brakes for exceptional stopping power</div>
                 </div>
-                <div class="spec-item">
-                    <span class="spec-label">ABS:</span>
-                    <span class="spec-value">Cornering ABS (switchable)</span>
+                <div class="highlight-card">
+                    <div class="highlight-number">05</div>
+                    <div class="highlight-text">Advanced rider aids with six riding modes</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-number">06</div>
+                    <div class="highlight-text">Rally-spec 21/17 spoked wheels for off-road capability</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-number">07</div>
+                    <div class="highlight-text">Class-leading electronics package</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-number">08</div>
+                    <div class="highlight-text">Long-travel suspension (240mm front / 230mm rear)</div>
                 </div>
             </div>
-        </div>
-
-        <div class="highlight">
-            <h2>Technology & Features</h2>
-            <ul class="features-list">
-                <li>7" Full-Color TFT Display with Turn-by-Turn Navigation</li>
-                <li>Full Bluetooth Connectivity (Calls, Music, GoPro Control)</li>
-                <li>"My Triumph" Connectivity Module (Standard)</li>
-                <li>USB-C Charging Port</li>
-                <li>Cornering ABS & Traction Control</li>
-                <li>Tire Pressure Monitoring System (TPMS)</li>
-                <li>Emergency Braking Warning System</li>
-                <li>High-Visibility Marker Lights</li>
-                <li>Quickshifter (Up & Down)</li>
-                <li>Heated Seats & Grips</li>
-                <li>LED Lighting (Full Suite)</li>
-                <li>Cruise Control</li>
-                <li>Off-Road Pro Mode (Rally Pro Exclusive)</li>
-            </ul>
-        </div>
-
-        <div class="price-section">
-            <h2>Starting Price</h2>
-            <div class="price">€17,395</div>
-            <p style="color: #888; margin-top: 10px;">Price may vary by market</p>
-        </div>
-
-        <div class="spec-card">
-            <h2>Key Highlights</h2>
-            <ul class="features-list">
-                <li>13% more peak power compared to previous generation</li>
-                <li>T-plane crankshaft for distinctive triple-cylinder character</li>
-                <li>Premium Showa suspension with extensive adjustment</li>
-                <li>Brembo Stylema brakes for exceptional stopping power</li>
-                <li>Advanced rider aids with six riding modes</li>
-                <li>Rally-spec 21/17 spoked wheels for off-road capability</li>
-                <li>Class-leading electronics package</li>
-                <li>Long-travel suspension (240mm front / 230mm rear)</li>
-            </ul>
-        </div>
+        </section>
 
         <footer>
             <p>Specifications for the 2026 Triumph Tiger Rally Pro 900</p>
-            <p style="margin-top: 10px;">
-                Sources:
-                <a href="https://www.triumphmotorcycles.com" target="_blank">Triumph Motorcycles</a> |
+            <div class="sources">
+                <a href="https://www.triumphmotorcycles.com" target="_blank">Triumph Motorcycles</a>
+                <span>|</span>
                 <a href="https://www.totalmotorcycle.com/motorcycles/2026/2026-triumph-tiger-900-rally-pro" target="_blank">Total Motorcycle</a>
-            </p>
-            <p style="margin-top: 20px; font-size: 0.9rem;">
+            </div>
+            <p style="margin-top: 30px; font-size: 0.85rem; opacity: 0.6;">
                 This page is for informational purposes only. Please contact your local Triumph dealer for the most accurate and up-to-date specifications.
             </p>
         </footer>
